@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "loadBalancerName": {
+      "value": "lb-palo-hub-govtx-001"
+    },
+    "frontendIPConfigurations": {
+      "value": [
+        {
+           "name": "fip-palo-hub-govtx",
+           "properties": {
+            "publicIPAddressId": "",
+            "subnetId":  "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-network-hub-govtx-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govtx-001/subnets/snet-palotrusted-hub-govtx-001",
+            "privateIPAddress": "10.201.0.70"
+          }
+        }
+      ]
+    },
+    "loadBalancingRules": {
+      "value": [
+        {
+          "name": "lbr-palo-hub-govtx",
+          "properties": {
+            "frontendIPConfigurationName": "fip-palo-hub-govtx",
+            "frontendPort": 0,
+            "backendPort": 0,
+            "enableFloatingIP": false,
+            "idleTimeoutInMinutes": 4,
+            "protocol": "All",
+            "enableTcpReset": false,
+            "loadDistribution": "Default",
+            "disableOutboundSnat": false,
+            "probeName": "hp-palo-hub-govtx"
+          }
+        }
+      ]
+    },
+    "probes": {
+      "value": [
+        {
+          "name": "hp-palo-hub-govtx",
+          "properties": {
+            "protocol": "TCP",
+            "port": 80,
+            "intervalInSeconds": 5,
+            "numberOfProbes": 2
+          }
+        }
+      ]
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    }
+  }
+}

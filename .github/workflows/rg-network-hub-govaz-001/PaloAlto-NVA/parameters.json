@@ -1,0 +1,101 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmNames": {
+      "value": [
+        "vmhubpalofwtx001",
+        "vmhubpalofwtx002"
+      ]
+    },
+    "imageReference": {
+      "value": {
+        "publisher": "paloaltonetworks",
+        "offer": "vmseries1",
+        "sku": "byol",
+        "version": "latest"
+      }
+    },
+    "plan": {
+      "value": {
+        "name": "byol",
+        "product": "vmseries1",
+        "publisher": "paloaltonetworks"
+      }
+    },
+    "osDisk": {
+      "value": {
+        "createOption": "fromImage"
+      }
+    },
+    "adminUsername": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-infra-hub-govtx-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govtx-001"
+        },
+        "secretName": "paloUsername"
+      }
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-infra-hub-govtx-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govtx-001"
+        },
+        "secretName": "paloPassword"
+      }
+    },
+    "nicConfigurations": {
+      "value": [
+        {
+          "nicSuffix": "-nic-mgmt",
+          "enableAcceleratedNetworking": true,          
+          "ipConfigurations": [
+            {
+              "name": "ip-mgmt",
+              "subnetId": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-network-hub-govtx-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govtx-001/subnets/snet-palomgmt-hub-govtx-001"
+            }
+          ]
+        },
+        {
+          "nicSuffix": "-nic-trusted",
+          "enableAcceleratedNetworking": true,
+          "ipConfigurations": [
+            {
+              "name": "ip-trusted",
+              "subnetId": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-network-hub-govtx-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govtx-001/subnets/snet-palotrusted-hub-govtx-001",
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-network-hub-govtx-001/providers/Microsoft.Network/loadBalancers/lb-palo-hub-govtx-001/backendAddressPools/lb-palo-hub-govtx-001-bp"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nicSuffix": "-nic-untrusted",
+          "enableAcceleratedNetworking": true,          
+          "ipConfigurations": [
+            {
+              "name": "ip-untrusted",
+              "publicIpNameSuffix": "-pip",
+              "enablePublicIP": true,     
+              "subnetId": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-network-hub-govtx-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govtx-001/subnets/snet-palountrusted-hub-govtx-001"
+            }
+          ]
+        }
+      ]
+    },    
+    "availabilitySetName": {
+      "value": "av-palo-hub-govtx-001"
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    },
+    "lockForDeletion": {
+      "value": false
+    },
+    "vmSize": {
+      "value": "Standard_DS5_v2"
+    }
+  }
+}

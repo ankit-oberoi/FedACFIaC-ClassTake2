@@ -1,0 +1,121 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "8.1.0.0",
+    "parameters": {
+        "adminUsername": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-infra-hub-govtx-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govtx-001"
+              },
+              "secretName": "f5Username"
+            }
+          },
+        "authenticationType": {
+            "value": "password"
+        },
+        "adminPasswordOrKey": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/2301b7dd-155e-47a5-9788-9b4487096456/resourceGroups/rg-infra-hub-govtx-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govtx-001"
+              },
+              "secretName": "f5Password"
+            }
+          }, 
+        "dnsLabel": {
+            "value": "DCSSBigIPtx"
+        },
+        "instanceName": {
+            "value": "vmhubf5fw002"
+        },
+        "numberOfExternalIps": {
+            "value": 1
+        },
+        "enableNetworkFailover": {
+            "value": "Yes"
+        },
+        "provisionInternalLoadBalancer": {
+            "value": "No"
+        },
+        "internalLoadBalancerProbePort": {
+            "value": "3456"
+        },
+        "instanceType": {
+            "value": "Standard_DS4_v2"
+        },
+        "imageName": {
+            "value": "AllTwoBootLocations"
+        },
+        "bigIpVersion": {
+            "value": "15.1.004000"
+        },
+        "bigIpModules": {
+            "value": "ltm:nominal"
+        },
+        "licenseKey1": {
+            "value": "RSCJM-QNEWE-UEBYH-LPOYT-DWBRVEO"
+        },
+        "licenseKey2": {
+            "value": "YKADI-XGOJM-QLQPL-QVTAP-NVTBHIG"
+        },
+        "vnetName": {
+            "value": "vnet-hub-govtx-001"
+        },
+        "vnetResourceGroupName": {
+            "value": "rg-network-hub-govtx-001"
+        },
+        "mgmtSubnetName": {
+            "value": "snet-f5mgmt-hub-govtx-001"
+        },
+        "mgmtIpAddressRangeStart": {
+            "value": "10.201.0.36"
+        },
+        "externalSubnetName": {
+            "value": "snet-f5untrusted-hub-govtx-001"
+        },
+        "externalIpAddressRangeStart": {
+            "value": "10.201.0.5"
+        },
+        "externalIpSelfAddressRangeStart": {
+            "value": "10.201.0.9"
+        },
+        "internalSubnetName": {
+            "value": "snet-f5trusted-hub-govtx-001"
+        },
+        "internalIpAddressRangeStart": {
+            "value": "10.201.0.20"
+        },
+        "provisionPublicIP": {
+            "value": "No"
+        },
+        "provisionPublicIPApp": {
+            "value": "Yes"
+        },
+        "declarationUrl": {
+            "value": "NOT_SPECIFIED"
+        },
+        "ntpServer": {
+            "value": "0.pool.ntp.org"
+        },
+        "timeZone": {
+            "value": "UTC"
+        },
+        "customImageUrn": {
+            "value": "OPTIONAL"
+        },
+        "customImage": {
+            "value": "OPTIONAL"
+        },
+        "restrictedSrcAddress": {
+            "value": "*"
+        },
+        "allowUsageAnalytics": {
+            "value": "Yes"
+        },
+        "allowPhoneHome": {
+            "value": "Yes"
+        },
+        "cuaId": {
+            "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+        }
+    }
+}

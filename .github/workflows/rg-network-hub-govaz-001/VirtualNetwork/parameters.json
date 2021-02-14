@@ -1,0 +1,96 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "vnet-hub-govaz-001"
+    },
+    "vnetAddressPrefixes": {
+      "value": ["10.200.0.0/20"]
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    },
+    "subnets": {
+      "value": [
+        {
+          "name": "snet-infra-hub-GovAZ-001",
+          "addressPrefix": "10.200.1.0/24",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },         
+        {
+          "name": "snet-f5untrusted-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.0/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-f5trusted-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.16/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-f5tmgmt-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.32/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-palountrusted-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.48/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-palotrusted-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.64/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-palomgmt-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.80/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-dc-hub-GovAZ-001",
+          "addressPrefix": "10.200.0.240/28",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-3rdParty-hub-GovAZ-001",
+          "addressPrefix": "10.200.2.0/24",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-netapp-hub-GovAZ-001",
+          "addressPrefix": "10.200.3.0/24",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "AzureBastionSubnet",
+          "addressPrefix": "10.200.4.0/24",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        }
+      ]
+    }
+  }
+}

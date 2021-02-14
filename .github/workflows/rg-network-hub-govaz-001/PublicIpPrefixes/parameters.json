@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "publicIpPrefixName": {
+            "value": "pippfx-hub-govaz-001"
+        },
+        "prefixLength": {
+            "value": 31 
+        },
+        "cuaId": {
+            "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"            
+            
+        },        
+        "lockForDeletion": {
+            "value": false
+        },
+
+        "tags": {
+            "value": {
+                "Environment": "Non-Prod",
+                "Contact": "test.user@testcompany.com",
+                "PurchaseOrder": "1234",
+                "CostCenter": "7890",
+                "ServiceName": "DeploymentValidation",
+                "Role": "DeploymentValidation"
+            }
+                    
+        
+            }
+    
+        }
+
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "networkSecurityGroupName": {
+      "value": "nsg-bastion-hub-govtx-001"
+    },
+    "networkSecurityGroupSecurityRules": {
+      "value": [
+        {
+          "name": "bastion-in-allow",
+          "properties": {
+            "description": "",
+            "protocol": "Tcp",
+            "sourcePortRange": "*",
+            "sourceAddressPrefix": "Internet",
+            "destinationPortRange": "443",
+            "destinationAddressPrefix": "*",
+            "access": "Allow",
+            "priority": 100,
+            "direction": "Inbound",
+            "sourcePortRanges": [],
+            "destinationPortRanges": [],
+            "sourceAddressPrefixes": [],
+            "destinationAddressPrefixes": [],
+            "sourceApplicationSecurityGroupIds": [],
+            "destinationApplicationSecurityGroupIds": []
+          }
+        },
+        {
+          "name": "bastion-control-in-allow",
+          "properties": {
+            "description": "",
+            "protocol": "Tcp",
+            "sourcePortRange": "*",
+            "sourceAddressPrefix": "GatewayManager",
+            "destinationPortRange": "",
+            "destinationPortRanges": [
+              "443",
+              "4443"
+            ],
+            "destinationAddressPrefix": "*",
+            "access": "Allow",
+            "priority": 120,
+            "direction": "Inbound",
+            "sourcePortRanges": [],
+            "sourceAddressPrefixes": [],
+            "destinationAddressPrefixes": [],
+            "sourceApplicationSecurityGroupIds": [],
+            "destinationApplicationSecurityGroupIds": []
+          }
+        },
+        {
+          "name": "bastion-in-deny",
+          "properties": {
+            "description": "",
+            "protocol": "*",
+            "sourcePortRange": "*",
+            "destinationPortRange": "*",
+            "sourceAddressPrefix": "*",
+            "destinationAddressPrefix": "*",
+            "access": "Deny",
+            "priority": 900,
+            "direction": "Inbound",
+            "sourcePortRanges": [],
+            "destinationPortRanges": [],
+            "sourceAddressPrefixes": [],
+            "destinationAddressPrefixes": [],
+            "sourceApplicationSecurityGroupIds": [],
+            "destinationApplicationSecurityGroupIds": []
+          }
+        },
+        {
+          "name": "bastion-vnet-out-allow",
+          "properties": {
+            "description": "",
+            "protocol": "Tcp",
+            "sourcePortRange": "*",
+            "sourceAddressPrefix": "*",
+            "destinationPortRange": "",
+            "destinationPortRanges": [
+              "22",
+              "3389"
+            ],
+            "destinationAddressPrefix": "VirtualNetwork",
+            "access": "Allow",
+            "priority": 100,
+            "direction": "Outbound",
+            "sourcePortRanges": [],
+            "sourceAddressPrefixes": [],
+            "destinationAddressPrefixes": [],
+            "sourceApplicationSecurityGroupIds": [],
+            "destinationApplicationSecurityGroupIds": []
+          }
+        },
+        {
+          "name": "bastion-azure-out-allow",
+          "properties": {
+            "description": "",
+            "protocol": "Tcp",
+            "sourcePortRange": "*",
+            "sourceAddressPrefix": "*",
+            "destinationPortRange": "443",
+            "destinationAddressPrefix": "AzureCloud",
+            "access": "Allow",
+            "priority": 120,
+            "direction": "Outbound",
+            "sourcePortRanges": [],
+            "destinationPortRanges": [],
+            "sourceAddressPrefixes": [],
+            "destinationAddressPrefixes": [],
+            "sourceApplicationSecurityGroupIds": [],
+            "destinationApplicationSecurityGroupIds": []
+          }
+        }
+      ]
+    },
+    "lockForDeletion": {
+        "value": false
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    }
+  }
+}

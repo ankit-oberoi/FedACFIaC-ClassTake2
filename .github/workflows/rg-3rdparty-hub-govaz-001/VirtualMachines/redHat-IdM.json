@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmNames": {
+      "value": ["vmhubredhatidm001","vmhubredhatidm002"]
+    },
+    "standardImage": {
+      "value": {
+        "publisher": "Redhat",
+        "offer": "rhel-byos",
+        "sku": "rhel-lvm77",
+        "version": "7.7.20190819"
+      }
+    },
+    "osDisk": {
+      "value": {
+        "createOption": "fromImage"
+      }
+    },
+    "dataDisks": {
+      "value": [
+        {
+          "caching": "ReadOnly",
+          "createOption": "Empty",
+          "diskSizeGB": "128",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          }
+        }
+      ]
+    },
+    "adminUsername": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-infra-hub-govaz-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govaz-001"
+        },
+        "secretName": "adminUsername"
+      }
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-infra-hub-govaz-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govaz-001"
+        },
+        "secretName": "adminPassword"
+      }
+    },
+    "subnetId": {
+      "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-network-hub-govaz-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govaz-001/subnets/snet-infra-hub-GovAZ-001"
+    },
+    "workspaceId": {
+      "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourcegroups/rg-infra-hub-govaz-001/providers/microsoft.operationalinsights/workspaces/law-infra-hub-govaz-001"
+    },
+    "diagnosticStorageAccountName": {
+      "value": "https://sainfrahubgovaz001.blob.core.usgovcloudapi.net/"
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    },
+    "vmSize": {
+      "value": "Standard_D2S_v3"
+    }
+  }
+}

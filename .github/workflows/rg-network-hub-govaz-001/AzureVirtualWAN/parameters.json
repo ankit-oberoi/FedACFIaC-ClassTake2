@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "wanName": {
+      "value": "vwan-hub-govaz-001"
+    },
+    "vpnsiteAddressspaceList": {
+      "value": []
+    },
+    "vpnsitePublicIPAddress": {
+      "value": "1.2.3.4"
+    },
+    "vpnsiteBgpAsn": {
+      "value": 65010
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    },        
+    "vpnsiteBgpPeeringAddress": {
+      "value": "1.1.1.1"
+    }
+  }
+}

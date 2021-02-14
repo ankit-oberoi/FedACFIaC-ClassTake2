@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "accountName": {
+    "value": "netapp-hub-govaz-001"
+    },
+    "capacityPoolName": {
+       "value": "netapppool001"
+    },
+    "poolVolumeName": {
+        "value": "netvolume001"
+    },
+    "creationToken": {
+        "value": "netvolume001"
+    },
+    "subnetID": {
+        "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-network-hub-govaz-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govaz-001/subnets/snet-netapp-hub-GovAZ-001"
+    },
+    "protocolTypes": {
+        "value": [
+            "NFSv4.1"
+        ]
+    }
+}
+  
+}

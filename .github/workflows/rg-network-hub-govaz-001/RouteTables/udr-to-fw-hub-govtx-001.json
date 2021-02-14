@@ -1,0 +1,43 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"routeTableName": {
+			"value": "udr-to-fw-hub-govtx-001"
+		},
+        "cuaId": {
+            "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+        },    		
+		"routes": {
+			"value": [
+				{
+					"name": "default",
+					"properties": {
+						"addressPrefix": "0.0.0.0/0",
+						"nextHopType": "VirtualAppliance",
+						"nextHopIpAddress": "10.201.0.70"
+					}
+				},
+				{
+					"name": "route-vpn-to-hq-hub-govtx-001",
+					"properties": {
+						"addressPrefix": "169.2.108.102/32",
+						"nextHopType": "VirtualAppliance",
+						"nextHopIpAddress": "10.201.0.70"
+					}
+				},
+				{
+					"name": "route-vpn-to-tmsb-hub-govtx-001",
+					"properties": {
+						"addressPrefix": "172.25.1.0/24",
+						"nextHopType": "VirtualAppliance",
+						"nextHopIpAddress": "10.201.0.70"
+					}
+				}
+			]
+		},
+        "lockForDeletion": {
+            "value": false
+        }
+	}
+}

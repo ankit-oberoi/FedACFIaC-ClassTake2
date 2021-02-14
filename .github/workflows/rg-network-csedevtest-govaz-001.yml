@@ -1,0 +1,137 @@
+name: rg-network-csedevtest-govaz-001
+
+on:
+  push: 
+    branches: [ NotTrigger ] 
+    paths:
+    - '.github/workflows/rg-network-csedevtest-govaz-001.yml'
+    - '.github/workflows/rg-network-csedevtest-govaz-001/*/*'
+
+env:
+  resourceGroupName: 'rg-network-csedevtest-govaz-001'
+  location: 'uswest2'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: azlogin
+      uses: ./.github/actions/azlogin
+      with:
+        identity: 'true'
+#        environmentName: 'AzureUSGovernment' 
+#        subscriptionId: '47a5904b-f5d7-4a6f-b76b-8b45cd8a9295'
+#        accountId: 'a7133410-0757-489c-b5c8-6e25550af495' # This is the ClientID for 'mi-github-devtest-001'
+
+#================================================================
+# =================== Network Security Groups =================== 
+# ===============================================================
+
+    - name: 'Network Security Group: nsg-infra-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/NetworkSecurityGroups/nsg-infra-csedevtest-govaz-001.json'
+        resourceGroupCommand: 'create'
+
+    - name: 'Network Security Group: nsg-web-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/NetworkSecurityGroups/nsg-web-csedevtest-govaz-001.json'
+
+    - name: 'Network Security Group: nsg-app-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/NetworkSecurityGroups/nsg-app-csedevtest-govaz-001.json'
+
+    - name: 'Network Security Group: nsg-data-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/NetworkSecurityGroups/nsg-data-csedevtest-govaz-001.json'
+
+    - name: 'Network Security Group: nsg-utility-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/NetworkSecurityGroups/nsg-utility-csedevtest-govaz-001.json'
+
+  # ===============================================================
+  # ======================== Route Tables =========================
+  # ===============================================================
+
+    - name: 'Route Table: udr-infra-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy 
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/RouteTables/udr-infra-csedevtest-govaz-001.json' 
+
+    - name: 'Route Table: udr-web-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy 
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/RouteTables/udr-web-csedevtest-govaz-001.json' 
+
+    - name: 'Route Table: udr-app-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy 
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/RouteTables/udr-app-csedevtest-govaz-001.json' 
+
+    - name: 'Route Table: udr-data-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy 
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/RouteTables/udr-data-csedevtest-govaz-001.json' 
+
+    - name: 'Route Table: udr-utility-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy 
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/RouteTables/udr-utility-csedevtest-govaz-001.json' 
+
+# ===============================================================    
+# ======================= Virtual Network =======================
+# ===============================================================
+        
+    - name: 'Virtual Network: vnet-csedevtest-govaz-001'
+      uses: ./.github/actions/azdeploy 
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/VirtualNetwork/vnet-csedevtest-govaz-001.json'
+
+# ===============================================================
+# ===================  Virtual Network Peering ================== 
+# ===============================================================
+    - name: 'Virtual Network Peering: vnet-peer-csedevtest-govaz-001-to-hub-govaz-001'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/VirtualNetworkPeering/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/VirtualNetworkPeering/Parameters/vnet-peer-csedevtest-govaz-001-to-hub-govaz-001.json'

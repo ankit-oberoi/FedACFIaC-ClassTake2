@@ -1,0 +1,256 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1607602747.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"$schema",
+		"projectName",
+		"organizationName",
+		"description",
+		"process",
+		"sourceControl",
+		"visibility",
+		"areaPaths",
+		"iterationPaths"
+	],
+	"properties": {
+		"$schema": {
+			"$id": "#root/$schema", 
+			"title": "$schema", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"hydrationShema.json"
+			],
+			"pattern": "^.*$"
+		},
+		"projectName": {
+			"$id": "#root/projectName", 
+			"title": "Projectname", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"ADO-project"
+			],
+			"pattern": "^.*$"
+		},
+		"organizationName": {
+			"$id": "#root/organizationName", 
+			"title": "Organizationname", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Contoso"
+			],
+			"pattern": "^.*$"
+		},
+		"description": {
+			"$id": "#root/description", 
+			"title": "Description", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Contoso project description"
+			],
+			"pattern": "^.*$"
+		},
+		"process": {
+			"$id": "#root/process", 
+			"title": "Process", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Agile"
+			],
+			"pattern": "^.*$"
+		},
+		"sourceControl": {
+			"$id": "#root/sourceControl", 
+			"title": "Sourcecontrol", 
+			"type": "string",
+			"default": "",
+			"enum": ["git", "tfvc"],
+			"examples": [
+				"git"
+			],
+			"pattern": "^.*$"
+		},
+		"visibility": {
+			"$id": "#root/visibility", 
+			"title": "Visibility", 
+			"type": "string",
+			"default": "",
+			"enum": ["public", "private", "enterprise"],
+			"examples": [
+				"public"
+			],
+			"pattern": "^.*$"
+		},
+		"repositoryName": {
+			"$id": "#root/repositoryName", 
+			"title": "Repositoryname", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"HydrationRepo"
+			],
+			"pattern": "^.*$"
+		},
+		"areaPaths": {
+			"$id": "#root/areaPaths", 
+			"title": "Areapaths", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/areaPaths/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"name"
+				],
+				"properties": {
+					"name": {
+						"$id": "#root/areaPaths/items/name", 
+						"title": "Name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Area path 1"
+						],
+						"pattern": "^.*$"
+					},
+					"children": {
+						"$id": "#root/areaPaths/items/children", 
+						"title": "Children", 
+						"type": "array",
+						"default": [],
+						"items":{
+							"$id": "#root/areaPaths/items/children/items", 
+							"title": "Items", 
+							"type": "object",
+							"required": [
+								"name"
+							],
+							"properties": {
+								"name": {
+									"$id": "#root/areaPaths/items/children/items/name", 
+									"title": "Name", 
+									"type": "string",
+									"default": "",
+									"examples": [
+										"Area path 1 sub 1"
+									],
+									"pattern": "^.*$"
+								},
+								"children": {
+									"$id": "#root/areaPaths/items/children/items/children", 
+									"title": "Children", 
+									"type": "array",
+									"default": []
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"iterationPaths": {
+			"$id": "#root/iterationPaths", 
+			"title": "Iterationpaths", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/iterationPaths/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"name"
+				],
+				"properties": {
+					"name": {
+						"$id": "#root/iterationPaths/items/name", 
+						"title": "Name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Sprint 0"
+						],
+						"pattern": "^.*$"
+					},
+					"attributes": {
+						"$id": "#root/iterationPaths/items/attributes", 
+						"title": "Attributes", 
+						"type": "object",
+						"required": [
+							"startDate",
+							"finishDate"
+						],
+						"properties": {
+							"startDate": {
+								"$id": "#root/iterationPaths/items/attributes/startDate", 
+								"title": "Startdate", 
+								"type": "string",
+								"default": "",
+								"examples": [
+									"2020-12-14"
+								],
+								"pattern": "^.*$"
+							},
+							"finishDate": {
+								"$id": "#root/iterationPaths/items/attributes/finishDate", 
+								"title": "Finishdate", 
+								"type": "string",
+								"default": "",
+								"examples": [
+									"2020-12-28"
+								],
+								"pattern": "^.*$"
+							}
+						}
+					}
+
+				}
+			}
+
+		},
+		"teams": {
+			"$id": "#root/teams", 
+			"title": "Teams", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/teams/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"name"
+				],
+				"properties": {
+					"name": {
+						"$id": "#root/teams/items/name", 
+						"title": "Name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Database Team"
+						],
+						"pattern": "^.*$"
+					},
+					"description": {
+						"$id": "#root/teams/items/description", 
+						"title": "Description", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"Database Team description."
+						],
+						"pattern": "^.*$"
+					}
+				}
+			}
+
+		}
+	}
+}

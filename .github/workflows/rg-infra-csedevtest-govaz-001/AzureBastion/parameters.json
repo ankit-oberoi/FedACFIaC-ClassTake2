@@ -1,0 +1,18 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "azureBastionName": {
+      "value": "ba-infra-csedevtest-govaz-001"
+    },
+    "vNetId": {
+      "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-network-csedevtest-govaz-001/providers/Microsoft.Network/virtualNetworks/vnet-csedevtest-govaz-001"
+    },
+    "azureBastionPipName": {
+      "value": "pip-bastion-csedevtest-govaz-001"
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    }
+  }
+}

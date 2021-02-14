@@ -1,0 +1,52 @@
+name: azvalidate
+description: 'Validate ARM template'
+inputs:
+  resourceGroupName:
+    description: 'Name of the resource group.'
+    required: true
+  location:
+    description: 'Location of the resource group.'
+    required: true
+  templateFile:
+    description: 'ARM template file location.'
+    required: true
+  parametersFile:
+    description: 'ARM parameters file location.'
+    required: true
+  templateUri:
+    description: 'ARM template file location URI.'
+    required: true
+  parametersUri:
+    description: 'ARM parameters file location URI.'
+    required: true
+  resourceGroupCommand:
+    description: 'RG command.'
+    default: 'create'
+    required: true
+  scope:
+    description: 'Deployment scope (resourcegroup or subscription). Location is required.'
+    default: 'resourcegroup'
+    required: true
+outputs:
+  output:
+    description: 'ARM outputs'
+runs:
+  using: "docker"
+  image: "dockerfile"
+  args:
+    - -resourceGroupName
+    - ${{ inputs.resourceGroupName }}
+    - -location
+    - ${{ inputs.location }}
+    - -templateFile
+    - ${{ inputs.templateFile }}
+    - -parametersFile
+    - ${{ inputs.parametersFile }}
+    - -templateUri
+    - ${{ inputs.templateUri }}
+    - -parametersUri
+    - ${{ inputs.parametersUri }}
+    - -resourceGroupCommand
+    - ${{ inputs.resourceGroupCommand }}
+    - -scope
+    - ${{ inputs.scope }}

@@ -1,0 +1,62 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "keyVaultName": {
+      "value": "kv-csedevtest-govaz-001"
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    },
+    "accessPolicies": {
+      "value": [
+      {
+        "tenantId": "354348a8-d3cf-4bac-b520-eb95925a9d96",
+        "objectId": "bd46728f-63b6-455c-8b8b-5fa06df03d4f",
+        "permissions": {
+            "keys": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ],
+            "secrets": [
+                "Get",
+                "List",
+                "Set",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ],
+            "certificates": []
+        }
+    },
+    {
+        "tenantId": "354348a8-d3cf-4bac-b520-eb95925a9d96",
+        "objectId": "95806554-9c0d-41c7-9e7b-94c3c9a7a3be",
+        "permissions": {
+            "keys": [
+                "Get"
+            ],
+            "secrets": [
+                "Get",
+                "List",
+                "Set",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ],
+            "certificates": []
+          }  
+        }
+      ]
+    }
+  }
+}

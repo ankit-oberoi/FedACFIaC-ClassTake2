@@ -1,0 +1,45 @@
+name: azlogin
+description: 'GitHub Action Azure Login (azlogin)'
+inputs:
+  clientId:
+    description: 'Application (client) ID'
+    required: true
+  clientSecret:
+    description: 'Application (client) secret/password'
+    required: true
+  tenantId:
+    description: 'Azure directory (tenant) ID'
+    required: false
+  subscriptionId:
+    description: 'Azure subscription ID'
+    required: false
+  identity:
+    description: 'Use managed identity for login.'
+    required: false
+  accountId:
+    description: 'Account Id for managed identity for login. To use the SystemAssigned identity, leave this parameter blank.'
+    required: false
+  environmentName:
+    description: 'For a specific Azure enviroment liek Azure US Gov.'
+    required: false
+outputs:
+  output:
+    description: 'Output'
+runs:
+  using: "docker"
+  image: "dockerfile"
+  args:
+    - -clientId
+    - ${{ inputs.clientId }}
+    - -clientSecret
+    - ${{ inputs.clientSecret }}
+    - -tenantId
+    - ${{ inputs.tenantId }}
+    - -subscriptionId
+    - ${{ inputs.subscriptionId }}
+    - -identity
+    - ${{ inputs.identity }}
+    - -accountId
+    - ${{ inputs.accountId }}
+    - -environmentName
+    - ${{ inputs.environmentName }}

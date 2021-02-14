@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmNames": {
+      "value": ["vmhubdc001", "vmhubdc002"]
+    },
+    "standardImage": {
+      "value": {
+        "publisher": "MicrosoftWindowsServer",
+        "offer": "WindowsServer",
+        "sku": "2019-Datacenter",
+        "version": "latest"
+      }
+    },
+    "osDisk": {
+      "value": {
+        "createOption": "fromImage"
+      }
+    },
+    "dataDisks": {
+      "value": [
+        {
+          "caching": "ReadOnly",
+          "createOption": "Empty",
+          "diskSizeGB": "256",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          }
+        },
+        {
+          "caching": "ReadOnly",
+          "createOption": "Empty",
+          "diskSizeGB": "256",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          }
+        }
+      ]
+    },
+    "adminUsername": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-infra-hub-govaz-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govaz-001"
+        },
+        "secretName": "adminUsername"
+      }
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-infra-hub-govaz-001/providers/Microsoft.KeyVault/vaults/kv-infra-hub-govaz-001"
+        },
+        "secretName": "adminPassword"
+      }
+    },
+    "subnetId": {
+      "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-network-hub-govaz-001/providers/Microsoft.Network/virtualNetworks/vnet-hub-govaz-001/subnets/snet-infra-hub-GovAZ-001"
+    },
+    "availabilitySetName":{
+      "value": "av-dc-hub-govaz-001"
+    },
+    "workspaceId": {
+      "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourcegroups/rg-infra-hub-govaz-001/providers/microsoft.operationalinsights/workspaces/law-infra-hub-govaz-001"
+    },
+    "diagnosticStorageAccountName": {
+      "value": "https://sainfrahubgovaz001.blob.core.usgovcloudapi.net/"
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    }
+  }
+}

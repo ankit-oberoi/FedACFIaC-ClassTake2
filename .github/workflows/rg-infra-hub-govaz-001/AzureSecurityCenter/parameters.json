@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceId": {
+            "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295/resourceGroups/rg-infra-hub-govaz-001/providers/Microsoft.OperationalInsights/workspaces/law-infra-hub-govaz-001"
+        },
+        "scope": {
+            "value": "/subscriptions/47a5904b-f5d7-4a6f-b76b-8b45cd8a9295"
+        },        
+        "securityContactProperties": {
+            "value": {
+                "email": "Darold.Cooper@dcss.ca.gov",
+                "phone": "+19164646573",
+                "alertNotifications": "On",
+                "alertsToAdmins": "Off"
+            }
+        }
+    }
+}

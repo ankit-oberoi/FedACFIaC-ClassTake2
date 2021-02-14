@@ -1,0 +1,22 @@
+name: azremove
+description: 'Remove Azure resource or resource group.'
+inputs:
+  resourceGroupName:
+    description: 'Name of the resource group to be removed.'
+    required: true
+  resourceName:
+    description: 'Name of the resource to be removed.'
+    required: false
+  resourceId:
+    description: 'Resource ID of the resource to be removed.'
+    required: false
+runs:
+  using: "docker"
+  image: "dockerfile"
+  args:
+    - -resourceGroupName
+    - ${{ inputs.resourceGroupName }}
+    - -resourceName
+    - ${{ inputs.resourceName }}
+    - -resourceId
+    - ${{ inputs.resourceId }}

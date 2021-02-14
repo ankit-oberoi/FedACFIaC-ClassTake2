@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "vnet-csedevtest-govaz-001"
+    },
+    "vnetAddressPrefixes": {
+      "value": ["10.200.64.0/19"]
+    },
+    "cuaId": {
+      "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+    },
+    "subnets": {
+      "value": [
+        {
+          "name": "snet-infra-csedevtest-govaz-001",
+          "addressPrefix": "10.200.64.0/26",
+          "networkSecurityGroupName": "",
+          "routeTableName": "udr-infra-csedevtest-govaz-001",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "AzureBastionSubnet",
+          "addressPrefix": "10.200.64.128/26",
+          "networkSecurityGroupName": "",
+          "routeTableName": "",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-web-csedevtest-govaz-001",
+          "addressPrefix": "10.200.65.0/26",
+          "networkSecurityGroupName": "nsg-web-csedevtest-govaz-001",
+          "routeTableName": "udr-web-csedevtest-govaz-001",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-app-csedevtest-govaz-001",
+          "addressPrefix": "10.200.65.64/26",
+          "networkSecurityGroupName": "nsg-app-csedevtest-govaz-001",
+          "routeTableName": "udr-app-csedevtest-govaz-001",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-data-csedevtest-govaz-001",
+          "addressPrefix": "10.200.65.128/26",
+          "networkSecurityGroupName": "nsg-data-csedevtest-govaz-001",
+          "routeTableName": "udr-data-csedevtest-govaz-001",
+          "serviceEndpoints": []
+        },
+        {
+          "name": "snet-utility-csedevtest-govaz-001",
+          "addressPrefix": "10.200.65.192/26",
+          "networkSecurityGroupName": "nsg-utility-csedevtest-govaz-001",
+          "routeTableName": "udr-utility-csedevtest-govaz-001",
+          "serviceEndpoints": []
+        }
+      ]
+    }
+  }
+}

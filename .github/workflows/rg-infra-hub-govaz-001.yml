@@ -1,0 +1,99 @@
+name: rg-infra-hub-govaz-001
+
+on:
+  push:
+    branches: [ NotTrigger ]
+    paths:
+    - '.github/workflows/rg-infra-hub-govaz-001.yml'
+    - '.github/workflows/rg-infra-hub-govaz-001/**'
+
+env:
+  resourceGroupName: 'rg-infra-hub-govaz-001'
+  location: 'uswest2'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: azlogin
+      uses: ./.github/actions/azlogin
+      with:
+        identity: 'true'
+#        environmentName: 'AzureUSGovernment' 
+#        subscriptionId: '47a5904b-f5d7-4a6f-b76b-8b45cd8a9295'
+#        accountId: 'aac3a4bf-cfbc-466a-7efa-18d514ac9c88' # This is the ClientID for 'mi-github-hub-001'
+
+    - name: RecoveryServicesVaults
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/RecoveryServicesVaults/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/RecoveryServicesVaults/parameters.json'
+        resourceGroupCommand: 'create'
+
+    - name: LogAnalytics
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/LogAnalytics/2020-03-09/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/LogAnalytics/parameters.json'
+
+    - name: StorageAccounts
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/StorageAccounts/2020-03-06/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/StorageAccounts/parameters.json'
+
+    - name: AzureBastion
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/AzureBastion/2019-12-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/AzureBastion/parameters.json'
+
+    - name: KeyVault
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: '${{ env.location }}'
+        templateFile: 'Modules/ARM/KeyVault/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/KeyVault/parameters.json'
+
+#    - name: AzureSecurityCenter 
+#      uses: ./.github/actions/azdeploy
+#      with:
+#        scope: subscription
+#        location: '${{ env.location }}'
+#        templateFile: 'Modules/ARM/AzureSecurityCenter/2019-11-28/deploy.json'
+#        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/AzureSecurityCenter/parameters.json'
+
+    - name: 'VirtualMachines: Domain Controllers'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }} 
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/VirtualMachines/2020-03-12/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/VirtualMachines/domaincontroller.json'
+
+    - name: 'VirtualMachines: SMTP Relay'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/VirtualMachines/2020-03-12/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/VirtualMachines/smtp.json'   
+  
+    - name: 'VirtualMachines: GitHub Runner'
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/VirtualMachines/2020-03-12/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/VirtualMachines/githubrunner.json'
+

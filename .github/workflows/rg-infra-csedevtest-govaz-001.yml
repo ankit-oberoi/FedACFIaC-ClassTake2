@@ -1,0 +1,60 @@
+name: rg-infra-csedevtest-govaz-001
+
+on:
+  push: 
+    branches: [ NotTrigger ] 
+    paths:
+    - '.github/workflows/rg-infra-csedevtest-govaz-001.yml'
+    - '.github/workflows/rg-infra-csedevtest-govaz-001/**'
+
+env:
+  resourceGroupName: 'rg-infra-csedevtest-govaz-001'
+  location: 'uswest2'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: azlogin
+      uses: ./.github/actions/azlogin
+      with:
+        identity: 'true'
+#        environmentName: 'AzureUSGovernment' 
+#        subscriptionId: '47a5904b-f5d7-4a6f-b76b-8b45cd8a9295'
+#        accountId: 'a7133410-0757-489c-b5c8-6e25550af495' # This is the ClientID for 'mi-github-devtest-001'
+
+    - name: LogAnalytics
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/LogAnalytics/2020-03-09/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/LogAnalytics/parameters.json'
+
+    - name: AzureBastion
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/AzureBastion/2019-12-03/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/AzureBastion/parameters.json'
+
+    - name: KeyVault
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: '${{ env.location }}'
+        resourceGroupCommand: 'create'
+        templateFile: 'Modules/ARM/KeyVault/2019-11-28/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/KeyVault/parameters.json'
+
+
+    - name: 'Virtual Machine: GitHub Runner' 
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: '${{ env.location }}'
+        resourceGroupCommand: 'create'
+        templateFile: 'Modules/ARM/VirtualMachines/2020-03-12/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/VirtualMachines/githubrunner.json'

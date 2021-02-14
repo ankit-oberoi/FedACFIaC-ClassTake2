@@ -1,0 +1,109 @@
+name: Hydra
+
+parameters:
+- name: includeTags
+  displayName: Include Tags
+  type: string
+  default: '-'
+- name: excludeTags
+  displayName: Exclude Tags
+  type: string
+  default: '-'
+- name: testcase
+  displayName: Test Case
+  type: string
+  default: '-'
+- name: testfile
+  displayName: Test File
+  type: string
+  default: '-'
+- name: versioningOption
+  displayName: Default publish version
+  type: string
+  default: patch
+  values:
+  - patch
+  - minor
+  - major
+- name: uiCustomVersion
+  displayName: -OR- Custom publish version
+  type: string
+  default: '-'
+
+trigger:
+  batch: true
+  paths:
+    include:
+      - Utilities/Hydration/*
+
+variables:
+- template: variables.yaml
+
+stages:
+- stage: Test
+  displayName: Test Hydra
+  jobs:
+    - job:
+      displayName: Hydration Module Tests
+      pool:
+        ${{ if ne(variables['vmImage'], '') }}:
+          vmImage: $(vmImage)
+        ${{ if ne(variables['poolName'], '') }}:
+          name: $(poolName)
+      steps:
+
+      - task: PowerShell@2
+        displayName: Invoke-Pester Hydra
+        inputs:
+          targetType: inline
+          pwsh: true
+          script: | 
+            . '$(System.DefaultWorkingDirectory)/Utilities/Hydration/Invoke-PesterWrapper.ps1'
+
+            $InputObject = @{
+              ModuleRoot                 = '$(System.DefaultWorkingDirectory)/Utilities/Hydration'
+              OutputFileName             = "testResults.xml"  
+              CodeCoverageOutputFileName = 'coverage.xml'
+            }                 
+            if('${{parameters.ExcludeTags}}' -ne '-') { $InputObject['ExcludeTags']  = '${{parameters.ExcludeTags}}' }
+            if('${{parameters.IncludeTags}}' -ne '-') { $InputObject['IncludeTags']  = '${{parameters.IncludeTags}}' }
+            if('${{parameters.TestFile}}' -ne '-') { $InputObject['TestFile']  = '${{parameters.TestFile}}' }
+            if('${{parameters.TestCase}}' -ne '-') { $InputObject['TestCase']  = '${{parameters.TestCase}}' }
+
+            Write-Output "Invoke-Pester with"
+            $InputObject.Keys | ForEach-Object { Write-Output ("PARAMETER: `t'{0}' with value '{1}' of type '{2}'" -f $_, $inputObject[$_], $inputObject[$_].GetType()) }  
+            Invoke-PesterWrapper @InputObject -Verbose
+          errorActionPreference: continue
+        enabled: true
+
+      - task: PublishTestResults@2
+        inputs:
+          searchFolder: '$(System.DefaultWorkingDirectory)/Utilities/Hydration'
+          # Make sure to use the 'NUnit' test runner
+          testRunner: "NUnit" # !!!
+          # Make sure the file name matches the file name you specified in the Invoke-Pester.ps1 script.
+          # A possibility is to add this as a parameter to the script
+          testResultsFiles: "**/testResults.xml"
+          testRunTitle: "PesterTests"
+          # Make the whole pipeline fail if a test is failed
+          failTaskOnFailedTests: false
+        displayName: "Publish Unit Test Results"
+        condition: in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues', 'Failed')
+
+      - task: PublishCodeCoverageResults@1
+        inputs:
+          codeCoverageTool: "JaCoCo"
+          summaryFileLocation: "**/coverage.xml"
+          pathToSources: "$(System.DefaultWorkingDirectory)/Utilities/Hydration"
+          failIfCoverageEmpty: false
+        displayName: "Publish Unit Test Code Coverage"
+        condition: and(in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues', 'Failed'), eq(variables['System.PullRequest.IsFork'], false))
+
+- stage: Publish
+  dependsOn: Test
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/main','refs/heads/master'))
+  jobs:
+  - template: /Modules/ARM/.global/PipelineTemplates/pipeline.jobs.publish.yml
+    parameters:
+      versioningOption: '${{ parameters.versioningOption }}'
+      uiCustomVersion: '${{ parameters.uiCustomVersion }}'
