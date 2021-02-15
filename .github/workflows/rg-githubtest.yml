@@ -9,7 +9,7 @@ on:
 
 env:
   resourceGroupName: 'rg-githubtest'
-  location: 'useast'
+  location: 'uswest2'
 
 jobs:
   deploy:
