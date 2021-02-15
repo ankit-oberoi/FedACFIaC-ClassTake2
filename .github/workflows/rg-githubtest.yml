@@ -1,0 +1,36 @@
+name: rg-githubtest
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+    - '.github/workflows/rg-githubtest.yml'
+    - '.github/workflows/rg-githubtest/**'
+
+env:
+  resourceGroupName: 'rg-githubtest'
+  location: 'useast'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: azlogin
+      uses: ./.github/actions/azlogin
+      with:
+        identity: 'true'
+        #environmentName: 'AzureCloud' 
+        #subscriptionId: 'subid'
+        #accountId: 'client' # This is the ClientID for 'mi-github-hub-001'
+
+    - name: LogAnalytics
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/LogAnalytics/deploy.json'
+        parametersFile: './.github/workflows/${{ env.resourceGroupName }}/LogAnalytics/parameters.json'
+
+
+
