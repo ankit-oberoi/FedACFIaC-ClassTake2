@@ -60,7 +60,7 @@ tar xzf ./actions-runner-linux-x64-2.277.1.tar.gz
 
 #Add your repo path and token after getting it from the GitHub repo (in the UI) under Settings\Actions\Add self-hosted runner.
 #Then run the following three commands
-./config.sh --url https://github.com/$1 --token $2 --unattended
+./config.sh --url $1 --token $2 --unattended
 sudo ./svc.sh install
 sudo ./svc.sh start
 #If you look in the GitHub repo Settings\Actions you should see your idle self-hosted runner
