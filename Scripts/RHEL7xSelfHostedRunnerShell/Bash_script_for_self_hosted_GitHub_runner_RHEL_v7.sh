@@ -1,5 +1,5 @@
 ########-------- Parameters --------#########################################
-# $1 The path for the Github repo, everything after https://github.com/     #
+# $1 The path for the Github repo, https://github.com/<orgname>/<reponame>  #
 # $2 Github Account PAT Token with access to the desired repo               #
 #############################################################################
 
