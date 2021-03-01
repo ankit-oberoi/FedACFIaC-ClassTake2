@@ -1,3 +1,8 @@
+########-------- Parameters --------#########################################
+# $1 The path for the Github repo, everything after https://github.com/     #
+# $2 Github Account PAT Token with access to the desired repo               #
+#############################################################################
+
 #Bash script for self-hosted runner using the 7.8 rhel gallery image and using a public IP to allow the connection to Azure RHUI repos
 
 #Install Azure cli on RHEL - Reference - https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-yum?view=azure-cli-latest
@@ -53,9 +58,9 @@ mkdir actions-runner && cd actions-runner
 curl -O -L https://github.com/actions/runner/releases/download/v2.277.1/actions-runner-linux-x64-2.277.1.tar.gz
 tar xzf ./actions-runner-linux-x64-2.277.1.tar.gz
 
-#Add your repo path and token after getting it from the GitHub repo under Settings\Actions\Add self-hosted runner.
+#Add your repo path and token after getting it from the GitHub repo (in the UI) under Settings\Actions\Add self-hosted runner.
 #Then run the following three commands
-#./config.sh --url https://github.com/<repopath> --token <token> --unattended
-#sudo ./svc.sh install
-#sudo ./svc.sh start
+./config.sh --url https://github.com/$1 --token $2 --unattended
+sudo ./svc.sh install
+sudo ./svc.sh start
 #If you look in the GitHub repo Settings\Actions you should see your idle self-hosted runner
