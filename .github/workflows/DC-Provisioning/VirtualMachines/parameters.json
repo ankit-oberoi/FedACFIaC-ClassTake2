@@ -1,0 +1,64 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmNames": {
+            "value": [
+                "dctest01"
+            ]
+        },
+        "imageReference": {
+            "value": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-Datacenter",
+                "version": "latest"
+            }
+        },
+        "osDisk": {
+            "value": {
+                "createOption": "fromImage",
+                "diskSizeGB": "128",
+                "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                }
+            }
+        },
+        "adminUsername": {
+            "value": "labadmin"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/fbabadf8-cb57-414b-9fbd-410ab7d2c541/resourceGroups/rsg-standardResources/providers/Microsoft.KeyVault/vaults/akv-litwareSecretsfedacf"
+                },
+                "secretName": "studentAdminCred"
+            }
+        },
+        "nicConfigurations": {
+            "value": [{
+                "nicSuffix": "-nic-01",
+                "ipConfigurations": [{
+                    "name": "ipconfig1",
+                    "vmIPAddress": "12.0.0.46",
+                    "subnetId": "/subscriptions/fbabadf8-cb57-414b-9fbd-410ab7d2c541/resourceGroups/rsg-Group1/providers/Microsoft.Network/virtualNetworks/vnt-litwareOnPrem/subnets/internalServices"
+                }]
+            }]
+        },
+        "dataDisks": {
+            "value": [
+              {
+                "caching": "ReadOnly",
+                "createOption": "Empty",
+                "diskSizeGB": "64",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            ]
+          },
+        "bootDiagnosticStorageAccountName": {
+            "value": "jriekse5555"
+        }
+    }
+}

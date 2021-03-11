@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/infradeployartifactsParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "value": "dctest01"
+        },
+        "saAcctUrl": {
+            "value": "https://storagexysxbsagaoiom.blob.core.windows.net/"
+        },
+        "container": {
+            "value": "temp"
+        },
+        "saSasToken": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/fbabadf8-cb57-414b-9fbd-410ab7d2c541/resourceGroups/EastRG/providers/Microsoft.KeyVault/vaults/jiriekse"
+                },
+                "secretName": "storagexysxbsagaoiom-read"
+            }
+        },
+        "dscScriptFile": {
+            "value": "CreateADPDC.ps1"
+        },
+        "configName": {
+            "value": "CreateADPDC"
+        },
+        "domainName": {
+            "value": "fedgroup1.litware.com"
+        },
+        "adminUsername": {
+            "value": "labadmin"
+        },
+        "adminCred": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/fbabadf8-cb57-414b-9fbd-410ab7d2c541/resourceGroups/rsg-standardResources/providers/Microsoft.KeyVault/vaults/akv-litwareSecretsfedacf"
+                },
+                "secretName": "studentAdminCred"
+            }
+        }
+    }
+}
