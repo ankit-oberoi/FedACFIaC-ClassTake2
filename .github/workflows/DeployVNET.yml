@@ -18,12 +18,12 @@ jobs:
     - name: azlogin
       uses: ./.github/actions/azlogin
       with:
-        identity: 'False'
+        identity: 'True'
         environmentName: 'AzureCloud' 
-        clientId: ${{ secrets.AZURE_CRED.clientId }}
-        clientSecret: ${{ secrets.AZURE_CRED.clientSecret }}
-        tenantId: ${{ secrets.AZURE_CRED.tenantId }}
-        subscriptionId: ${{ secrets.AZURE_CRED.subscriptionId }}
+#        clientId: ${{ secrets.AZURE_CRED.clientId }}
+#        clientSecret: ${{ secrets.AZURE_CRED.clientSecret }}
+#        tenantId: ${{ secrets.AZURE_CRED.tenantId }}
+#        subscriptionId: ${{ secrets.AZURE_CRED.subscriptionId }}
     
 #================================================================
 # =================== DEV Network Security Groups ===============
