@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "value": "VNET-West-DEV"
+        },
+        "vnetAddressPrefixes": {
+            "value": ["10.0.0.0/16"]
+        },
+        "subnets": {
+            "value": [{
+                    "name": "DEV-West-Subnet",
+                    "addressPrefix": "10.0.0.0/24",
+                    "networkSecurityGroupName": "VNET-West-DEV-NSG",
+                    "routeTableName": "",
+                    "serviceEndpoints": [{
+                            "service": "Microsoft.EventHub"
+                        },
+                        {
+                            "service": "Microsoft.Sql"
+                        },
+                        {
+                            "service": "Microsoft.Storage"
+                        },
+                        {
+                            "service": "Microsoft.KeyVault"
+                        }
+                    ],
+                    "delegations": []
+                    "privateEndpointNetworkPolicies": "Disabled", // This property must be set to disabled for subnets that contain private endpoints. It confirms that NSGs rules will not apply to private endpoints (currently not supported). Default Value when not specified is "Enabled".
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                }
+            ]
+        }
+        // "roleAssignments": {
+        //     "value": [
+        //         {
+        //             "roleDefinitionIdOrName": "Desktop Virtualization User",
+        //             "principalIds": [
+        //                 "12345678-1234-1234-1234-123456789012", // object 1
+        //                 "78945612-1234-1234-1234-123456789012" // object 2
+        //             ]
+        //         }
+        //     ]
+        // }
+    }
+}

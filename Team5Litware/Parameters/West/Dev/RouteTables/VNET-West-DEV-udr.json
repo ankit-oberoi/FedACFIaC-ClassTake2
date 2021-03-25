@@ -1,0 +1,24 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"routeTableName": {
+			"value": "VNET-West-DEV-udr"
+		},
+        "cuaId": {
+            "value": "aaaaaaaa-bbbb-cccc-dddddddddddddddd"
+        },    		
+		"routes": {
+			"value": [
+				{
+					"name": "default",
+					"properties": {
+						"addressPrefix": "10.1.1.0/24",
+						"nextHopType": "VirtualAppliance",
+						"nextHopIpAddress": "13.77.136.122"
+					}
+				}
+			]
+		}
+	}
+}
