@@ -15,8 +15,8 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: azure/login@v1
-        with:
-         creds: ${{ secrets.AZURE_CRED}}
+      with:
+       creds: ${{ secrets.AZURE_CRED}}
 
           # This is for VNET Deployment
 
