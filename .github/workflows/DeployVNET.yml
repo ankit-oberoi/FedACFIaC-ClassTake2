@@ -14,10 +14,17 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-    - uses: azure/login@v1
+    - uses: actions/checkout@v2
+    - name: azlogin
+      uses: ./.github/actions/azlogin
       with:
-       creds: ${{ secrets.AZURE_CRED}}
-
+        identity: 'False'
+        environmentName: 'AzureCloud' 
+        clientId: ${{ secrets.AZURE_CRED.clientId }}
+        clientSecret: ${{ secrets.AZURE_CRED.clientSecret }}
+        tenantId: ${{ secrets.AZURE_CRED.tenantId }}
+        subscriptionId: ${{ secrets.AZURE_CRED.subscriptionId }}
+    
 #================================================================
 # =================== DEV Network Security Groups ===============
 # ===============================================================
