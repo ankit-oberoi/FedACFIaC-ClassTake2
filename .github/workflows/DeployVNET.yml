@@ -137,5 +137,3 @@ jobs:
         location: ${{ env.location }}
         templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
-        
-        parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
