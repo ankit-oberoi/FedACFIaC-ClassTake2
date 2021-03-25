@@ -34,7 +34,7 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
         location: ${{ secrets.location }}
-        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Dev/NetworkSecurityGroups/VNET-West-DEV-NSG.json'
         resourceGroupCommand: 'create'
 
@@ -47,7 +47,7 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
         location: ${{ secrets.location }}
-        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        templateFile: 'Modules/ARM/RouteTables/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Dev/RouteTables/VNET-West-DEV-udr.json'  
 
 # ===============================================================    
@@ -59,7 +59,7 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
         location: ${{ secrets.location }}
-        templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
+        templateFile: 'Modules/ARM/VirtualNetwork/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Dev/VirtualNetwork/VNET-West-DEV.json'
 
 #================================================================
@@ -71,7 +71,7 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.PROD_RES_GROUP }}
         location: ${{ secrets.location }}
-        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/NetworkSecurityGroups/VNET-West-PROD-NSG.json'
         resourceGroupCommand: 'create'
 
@@ -84,7 +84,7 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.PROD_RES_GROUP }}
         location: ${{ secrets.location }}
-        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        templateFile: 'Modules/ARM/RouteTables/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/RouteTables/VNET-West-PROD-udr.json'  
 
 # ===============================================================    
@@ -96,5 +96,5 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.PROD_RES_GROUP }}
         location: ${{ secrets.location }}
-        templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
+        templateFile: 'Modules/ARM/VirtualNetwork/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
