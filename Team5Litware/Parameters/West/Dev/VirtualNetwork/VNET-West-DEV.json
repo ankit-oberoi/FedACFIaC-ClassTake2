@@ -6,15 +6,19 @@
             "value": "VNET-West-DEV"
         },
         "vnetAddressPrefixes": {
-            "value": ["10.0.0.0/16"]
+            "value": [
+                "10.0.0.0/16"
+            ]
         },
         "subnets": {
-            "value": [{
+            "value": [
+                {
                     "name": "DEV-West-Subnet",
                     "addressPrefix": "10.0.0.0/24",
                     "networkSecurityGroupName": "VNET-West-DEV-NSG",
                     "routeTableName": "",
-                    "serviceEndpoints": [{
+                    "serviceEndpoints": [
+                        {
                             "service": "Microsoft.EventHub"
                         },
                         {
@@ -28,11 +32,10 @@
                         }
                     ],
                     "delegations": [],
-                    "privateEndpointNetworkPolicies": "Disabled", 
+                    "privateEndpointNetworkPolicies": "Disabled",
                     "privateLinkServiceNetworkPolicies": "Enabled"
                 }
             ]
         }
-        
     }
 }
