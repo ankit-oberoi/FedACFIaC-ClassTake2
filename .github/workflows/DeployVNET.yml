@@ -22,25 +22,25 @@ jobs:
 
           # This is for VNET Deployment
 
-      - name: Deploy Azure VNET West
-        uses: Azure/arm-deploy@v1
-        with:
-          # Provide the scope of the deployment. Valid values are: 'VNET', 'subscription'
-          scope: 'subscription'
-          # Override the Subscription Id set by Azure Login.
-          subscriptionId: '8dea3428-7d28-49bf-9340-2aafb548a0d2'
-          # Provide the target region, only required for management Group or Subscription deployments.
-          region: 'westus2'
-          # Provide the name of a resource group, only required for resource Group deployments.
-          resourceGroupName: Dev-West
-          # Specify the path or URL to the Azure Resource Manager template.
-          template: 'Modules/ARM/VirtualNetwork/deploy.json'
-          # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
-          deploymentMode: 'Incremental'
-          # Specifies the name of the resource group deployment to create.
-          deploymentName: 'Deploy-Azure-VNET'
-          # Supply deployment parameter values.
-          parameters: 'Team5Litware/Parameters/West/Dev/VNET-West-DEV.json'
+    - name: Deploy Azure VNET West
+      uses: Azure/arm-deploy@v1
+      with:
+        # Provide the scope of the deployment. Valid values are: 'VNET', 'subscription'
+        scope: 'subscription'
+        # Override the Subscription Id set by Azure Login.
+        subscriptionId: '8dea3428-7d28-49bf-9340-2aafb548a0d2'
+        # Provide the target region, only required for management Group or Subscription deployments.
+        region: 'westus2'
+        # Provide the name of a resource group, only required for resource Group deployments.
+        resourceGroupName: Dev-West
+        # Specify the path or URL to the Azure Resource Manager template.
+        template: 'Modules/ARM/VirtualNetwork/deploy.json'
+        # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
+        deploymentMode: 'Validate'
+        # Specifies the name of the resource group deployment to create.
+        deploymentName: 'Deploy-Azure-VNET'
+        # Supply deployment parameter values.
+        parameters: 'Team5Litware/Parameters/West/Dev/VirtualNetwork/VNET-West-DEV.json'
 
 #================================================================
 # =================== DEV Network Security Groups ===============
@@ -77,31 +77,31 @@ jobs:
         resourceGroupName: ${{ env.resourceGroupName }}
         location: ${{ env.location }}
         templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
-        parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
+        parametersFile: 'Team5Litware/Parameters/West/Dev/VirtualNetwork/VNET-West-DEV.json'
 
 # ===============================================================
 # ======================= PROD Virtual Network ==================
 # ===============================================================
 
-        - name: Deploy Azure VNET Production West
-        uses: Azure/arm-deploy@v1
-        with:
-          # Provide the scope of the deployment. Valid values are: 'VNET', 'subscription'
-          scope: 'subscription'
-          # Override the Subscription Id set by Azure Login.
-          subscriptionId: '8dea3428-7d28-49bf-9340-2aafb548a0d2'
-          # Provide the target region, only required for management Group or Subscription deployments.
-          region: 'westus2'
-          # Provide the name of a resource group, only required for resource Group deployments.
-          resourceGroupName: Production-West
-          # Specify the path or URL to the Azure Resource Manager template.
-          template: 'Modules/ARM/VirtualNetwork/deploy.json'
-          # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
-          deploymentMode: 'Incremental'
-          # Specifies the name of the resource group deployment to create.
-          deploymentName: 'Deploy-Azure-VNET'
-          # Supply deployment parameter values.
-          parameters: 'Team5Litware/Parameters/West/Dev/VNET-West-DEV.json'
+    - name: Deploy Azure VNET Production West
+      uses: Azure/arm-deploy@v1
+      with:
+        # Provide the scope of the deployment. Valid values are: 'VNET', 'subscription'
+        scope: 'subscription'
+        # Override the Subscription Id set by Azure Login.
+        subscriptionId: '8dea3428-7d28-49bf-9340-2aafb548a0d2'
+        # Provide the target region, only required for management Group or Subscription deployments.
+        region: 'westus2'
+        # Provide the name of a resource group, only required for resource Group deployments.
+        resourceGroupName: Production-West
+        # Specify the path or URL to the Azure Resource Manager template.
+        template: 'Modules/ARM/VirtualNetwork/deploy.json'
+        # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
+        deploymentMode: 'Incremental'
+        # Specifies the name of the resource group deployment to create.
+        deploymentName: 'Deploy-Azure-VNET'
+        # Supply deployment parameter values.
+        parameters: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
 
 #================================================================
 # =================== PROD Network Security Groups ==============
