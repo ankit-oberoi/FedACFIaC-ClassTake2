@@ -13,10 +13,56 @@
         "subnets": {
             "value": [
                 {
-                    "name": "DEV-West-Subnet",
+                    "name": "DEV-West-Gateway-Subnet",
                     "addressPrefix": "10.0.0.0/24",
                     "networkSecurityGroupName": "VNET-West-DEV-NSG",
-                    "routeTableName": "",
+                    "routeTableName": "VNET-West-DEV-udr",
+                    "serviceEndpoints": [
+                        {
+                            "service": "Microsoft.EventHub"
+                        },
+                        {
+                            "service": "Microsoft.Sql"
+                        },
+                        {
+                            "service": "Microsoft.Storage"
+                        },
+                        {
+                            "service": "Microsoft.KeyVault"
+                        }
+                    ],
+                    "delegations": [],
+                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                },
+                {
+                    "name": "DEV-West-Infra-Subnet",
+                    "addressPrefix": "10.0.1.0/24",
+                    "networkSecurityGroupName": "VNET-West-DEV-NSG",
+                    "routeTableName": "VNET-West-DEV-udr",
+                    "serviceEndpoints": [
+                        {
+                            "service": "Microsoft.EventHub"
+                        },
+                        {
+                            "service": "Microsoft.Sql"
+                        },
+                        {
+                            "service": "Microsoft.Storage"
+                        },
+                        {
+                            "service": "Microsoft.KeyVault"
+                        }
+                    ],
+                    "delegations": [],
+                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                },
+                {
+                    "name": "DEV-West-Bastian-Subnet",
+                    "addressPrefix": "10.0.2.0/24",
+                    "networkSecurityGroupName": "VNET-West-DEV-NSG",
+                    "routeTableName": "VNET-West-DEV-udr",
                     "serviceEndpoints": [
                         {
                             "service": "Microsoft.EventHub"
