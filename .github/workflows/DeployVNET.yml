@@ -20,12 +20,12 @@ jobs:
     - name: azlogin
       uses: ./.github/actions/azlogin
       with:
-        identity: 'False'
+        identity: 'True'
         environmentName: 'AzureCloud' 
-        clientId: ${{ secrets.AZURE_CRED.clientId }}
-        clientSecret: ${{ secrets.AZURE_CRED.clientSecret }}
-        tenantId: ${{ secrets.AZURE_CRED.tenantId }}
-        subscriptionId: ${{ secrets.AZURE_CRED.subscriptionId }}
+#        clientId: ${{ secrets.AZURE_CRED.clientId }}
+#        clientSecret: ${{ secrets.AZURE_CRED.clientSecret }}
+#        tenantId: ${{ secrets.AZURE_CRED.tenantId }}
+#        subscriptionId: ${{ secrets.AZURE_CRED.subscriptionId }}
     
 #================================================================
 # =================== DEV Network Security Groups ===============
@@ -34,9 +34,9 @@ jobs:
     - name: 'Network Security Group: VNET-West-DEV-NSG'
       uses: ./.github/actions/azdeploy
       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        location: ${{ env.location }}
-        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
+        location: ${{ secrets.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Dev/NetworkSecurityGroups/VNET-West-DEV-NSG.json'
         resourceGroupCommand: 'create'
 
@@ -47,9 +47,9 @@ jobs:
     - name: 'Route Table: VNET-West-DEV-udr'
       uses: ./.github/actions/azdeploy 
       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        location: ${{ env.location }}
-        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
+        location: ${{ secrets.location }}
+        templateFile: 'Modules/ARM/RouteTables/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Dev/RouteTables/VNET-West-DEV-udr.json'  
 
 # ===============================================================    
@@ -59,9 +59,9 @@ jobs:
     - name: 'Virtual Network: VNET-West-DEV'
       uses: ./.github/actions/azdeploy 
       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        location: ${{ env.location }}
-        templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
+        resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
+        location: ${{ secrets.location }}
+        templateFile: 'Modules/ARM/VirtualNetwork/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Dev/VirtualNetwork/VNET-West-DEV.json'
 
 #================================================================
@@ -71,9 +71,9 @@ jobs:
     - name: 'Network Security Group: VNET-West-PROD-NSG'
       uses: ./.github/actions/azdeploy
       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        location: ${{ env.location }}
-        templateFile: 'Modules/ARM/NetworkSecurityGroups/2019-11-28/deploy.json'
+        resourceGroupName: ${{ secrets.PROD_RES_GROUP }}
+        location: ${{ secrets.location }}
+        templateFile: 'Modules/ARM/NetworkSecurityGroups/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/NetworkSecurityGroups/VNET-West-PROD-NSG.json'
         resourceGroupCommand: 'create'
 
@@ -84,9 +84,9 @@ jobs:
     - name: 'Route Table: VNET-West-PROD-udr'
       uses: ./.github/actions/azdeploy 
       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        location: ${{ env.location }}
-        templateFile: 'Modules/ARM/RouteTables/2020-03-03/deploy.json'
+        resourceGroupName: ${{ secrets.PROD_RES_GROUP }}
+        location: ${{ secrets.location }}
+        templateFile: 'Modules/ARM/RouteTables/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/RouteTables/VNET-West-PROD-udr.json'  
 
 # ===============================================================    
@@ -96,8 +96,7 @@ jobs:
     - name: 'Virtual Network: VNET-West-PROD'
       uses: ./.github/actions/azdeploy 
       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        location: ${{ env.location }}
-        templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
+        resourceGroupName: ${{ secrets.PROD_RES_GROUP }}
+        location: ${{ secrets.location }}
+        templateFile: 'Modules/ARM/VirtualNetwork/deploy.json'
         parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
-
