@@ -34,7 +34,7 @@ jobs:
         # Specify the path or URL to the Azure Resource Manager template.
         template: 'Modules/ARM/VirtualNetwork/deploy.json'
         # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
-        deploymentMode: 'Incremental'
+        deploymentMode: 'Validate'
         # Specifies the name of the resource group deployment to create.
         deploymentName: 'Deploy-Azure-VNET'
         # Supply deployment parameter values.
