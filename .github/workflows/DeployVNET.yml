@@ -38,7 +38,7 @@ jobs:
         # Specifies the name of the resource group deployment to create.
         deploymentName: 'Deploy-Azure-VNET'
         # Supply deployment parameter values.
-        parameters: 'Team5Litware/Parameters/West/Dev/VNET-West-DEV.json'
+        parameters: 'Team5Litware/Parameters/West/Dev/VirtualNetwork/VNET-West-DEV.json'
 
 #================================================================
 # =================== DEV Network Security Groups ===============
@@ -75,7 +75,7 @@ jobs:
         resourceGroupName: ${{ env.resourceGroupName }}
         location: ${{ env.location }}
         templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
-        parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
+        parametersFile: 'Team5Litware/Parameters/West/Dev/VirtualNetwork/VNET-West-DEV.json'
 
 # ===============================================================
 # ======================= PROD Virtual Network ==================
@@ -99,7 +99,7 @@ jobs:
         # Specifies the name of the resource group deployment to create.
         deploymentName: 'Deploy-Azure-VNET'
         # Supply deployment parameter values.
-        parameters: 'Team5Litware/Parameters/West/Dev/VNET-West-DEV.json'
+        parameters: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
 
 #================================================================
 # =================== PROD Network Security Groups ==============
@@ -136,4 +136,6 @@ jobs:
         resourceGroupName: ${{ env.resourceGroupName }}
         location: ${{ env.location }}
         templateFile: 'Modules/ARM/VirtualNetwork/2020-03-09/deploy.json'
+        parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
+        
         parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualNetwork/VNET-West-PROD.json'
