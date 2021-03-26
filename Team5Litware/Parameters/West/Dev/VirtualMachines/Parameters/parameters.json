@@ -5,7 +5,6 @@
         "vmNames": {
             "value": [
                 "SQL-IIS-VM-01"
-                
             ]
         },
         "vmComputerNames": {
@@ -36,7 +35,6 @@
         "adminUsername": {
             "value": "LabAdmin"
         },
-        
         "adminPassword": {
             "reference": {
                 "keyVault": {
@@ -46,15 +44,51 @@
             }
         },
         "nicConfigurations": {
-            "value": [{
-                "nicSuffix": "-nic-01",
-                "ipConfigurations": [{
-                    "name": "ipconfig1",
-                    "vmIPAddress": "10.0.1.10",
-                    "subnetId": "/subscriptions/8dea3428-7d28-49bf-9340-2aafb548a0d2/resourceGroups/Dev-West/providers/Microsoft.Network/virtualNetworks/VNET-West-DEV/subnets/DEV-West-Infra-Subnet"
-                }]
-            }]
+            "value": [
+                {
+                    "nicSuffix": "-nic-01",
+                    "ipConfigurations": [
+                        {
+                            "name": "ipconfig1",
+                            "vmIPAddress": "10.0.1.10",
+                            "subnetId": "/subscriptions/8dea3428-7d28-49bf-9340-2aafb548a0d2/resourceGroups/Dev-West/providers/Microsoft.Network/virtualNetworks/VNET-West-DEV/subnets/DEV-West-Infra-Subnet"
+                        }
+                    ]
+                }
+            ]
+        },
+        "bootDiagnosticStorageAccountName": {
+            "value": "jriekse55551"
+        },
+        "dscConfiguration": {
+            "value": {
+                "Settings": {
+                    "Properties": [
+                        {
+                            "Name": "RegistrationKey",
+                            "Value": {
+                                "UserName": "PLACEHOLDER_DONOTUSE",
+                                "Password": "PrivateSettingsRef:registrationKeyPrivate"
+                            },
+                            "TypeName": "System.Management.Automation.PSCredential"
+                        },
+                        {
+                            "Name": "RegistrationUrl",
+                            "Value": "[reference(concat('Microsoft.Automation/automationAccounts/', https://bc633d1c-b0cf-44ba-8b5c-c3e9e7696659.agentsvc.wus2.azure-automation.net/accounts/bc633d1c-b0cf-44ba-8b5c-c3e9e7696659]",
+                            "TypeName": "System.String"
+                        },
+                        {
+                            "Name": "NodeConfigurationName",
+                            "Value": "sqliss.localhost",
+                            "TypeName": "System.String"
+                        }
+                    ]
+                },
+                "ProtectedSettings": {
+                    "Items": {
+                        "registrationKeyPrivate": "[listKeys(resourceId('Microsoft.Automation/automationAccounts/', 'aaa-labautomation-group5'), '2018-06-30').Keys[0].value]"
+                    }
+                }
+            }
         }
-
     }
-}
