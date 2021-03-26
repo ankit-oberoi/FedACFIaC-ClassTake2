@@ -4,13 +4,13 @@
     "parameters": {
         "vmNames": {
             "value": [
-                "SQL-IIS-VM-01-Prod"
+                "SQL-IIS-VM-Prod"
                 
             ]
         },
         "vmComputerNames": {
             "value": {
-                "sxxazvmweux-XXXXX-01": "SQLIISVM-1-Prod"
+                "sxxazvmweux-XXXXX-01": "SQLIISVM-Prod"
             }
         },
         "vmComputerNamesTransformation": {
