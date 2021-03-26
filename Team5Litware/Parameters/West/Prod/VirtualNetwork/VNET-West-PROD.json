@@ -59,10 +59,10 @@
                     "privateLinkServiceNetworkPolicies": "Enabled"
                 },
                 {
-                    "name": "Prod-West-Bastian-Subnet",
-                    "addressPrefix": "10.0.2.0/24",
-                    "networkSecurityGroupName": "VNET-West-Prod-NSG",
-                    "routeTableName": "VNET-West-Prod-udr",
+                    "name": "AzureBastionSubnet",
+                    "addressPrefix": "10.0.2.0/27",
+                    "networkSecurityGroupName": "",
+                    "routeTableName": "",
                     "serviceEndpoints": [
                         {
                             "service": "Microsoft.EventHub"
