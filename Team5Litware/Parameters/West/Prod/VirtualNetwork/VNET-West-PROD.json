@@ -62,7 +62,7 @@
                     "name": "AzureBastionSubnet",
                     "addressPrefix": "10.0.2.0/27",
                     "networkSecurityGroupName": "",
-                    "routeTableName": "VNET-West-Prod-udr",
+                    "routeTableName": "",
                     "serviceEndpoints": [
                         {
                             "service": "Microsoft.EventHub"
