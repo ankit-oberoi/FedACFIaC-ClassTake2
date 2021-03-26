@@ -1,0 +1,39 @@
+
+name: IIS-SQL-Provisioning
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
+  location: 'uswest2'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: azlogin
+      uses: ./.github/actions/azlogin
+      with:
+        identity: 'true'
+
+    - name: IIS SQL Server
+      uses: ./.github/actions/azdeploy
+      with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        location: ${{ env.location }}
+        templateFile: 'Modules/ARM/VirtualMachines/deploy.json'
+        parametersFile: 'Team5Litware/Parameters/West\Prod/VirtualMachines/Parameters/parameters.json'
+        
+
+ #  - name: Domain Controller DSC
+  #    uses: ./.github/actions/azdeploy
+   #   with:
+    #    resourceGroupName: ${{ env.resourceGroupName }}
+     #   location: ${{ env.location }}
+     #   templateFile: './.github/workflows/DC-Provisioning/VirtualMachines/dsc.args.deploy.rerun.json'
+     #   parametersFile: './.github/workflows/DC-Provisioning/VirtualMachines/DC_DSC_parameters.json'
+
+
