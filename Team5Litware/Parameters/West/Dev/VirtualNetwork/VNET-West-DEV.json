@@ -61,7 +61,7 @@
                 {
                     "name": "AzureBastionSubnet",
                     "addressPrefix": "10.0.2.0/27",
-                    "networkSecurityGroupName": "VNET-West-DEV-NSG",
+                    "networkSecurityGroupName": "",
                     "routeTableName": "VNET-West-DEV-udr",
                     "serviceEndpoints": [
                         {
