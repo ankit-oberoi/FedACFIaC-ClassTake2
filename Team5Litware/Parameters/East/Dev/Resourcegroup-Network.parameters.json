@@ -3,7 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"resourceGroupName": {
-			"value": "Production-Est"
+			"value": "Dev-East"
 		},
 		"lockForDeletion": {
 			"value": false

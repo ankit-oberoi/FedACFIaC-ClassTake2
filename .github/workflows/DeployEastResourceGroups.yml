@@ -1,0 +1,78 @@
+# This is a basic workflow to help you get started with Actions
+
+name: DeployResourceGroup-Team5
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  Deploy:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted]
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+ 
+      - uses: azure/login@v1
+        with:
+         creds: ${{ secrets.AZURE_CRED}}
+
+          # This is for Dev Resource group Deployment
+
+      - name: Deploy Litware East Resource Group Dev
+        uses: Azure/arm-deploy@v1
+        with:
+          # Provide the scope of the deployment. Valid values are: 'resourcegroup', 'managementgroup', 'subscription'
+          scope: 'subscription'
+          # Override the Subscription Id set by Azure Login.
+          subscriptionId: '8dea3428-7d28-49bf-9340-2aafb548a0d2'
+          # Provide the target region, only required for management Group or Subscription deployments.
+          region: 'eastus2'
+          # Provide the name of a resource group, only required for resource Group deployments.
+          # resourceGroupName: # optional
+          # Specify the path or URL to the Azure Resource Manager template.
+          template: 'Modules/ARM/ResourceGroup/deploy.json'
+          # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
+          deploymentMode: 'Incremental'
+          # Specifies the name of the resource group deployment to create.
+          deploymentName: 'Deploy-Azure-ResourceGroup'
+          # Supply deployment parameter values.
+          parameters: 'Team5Litware/Parameters/East/Dev/Resourcegroup-Network.parameters.json'
+          
+          # This is for Production Resource group Deployment
+
+      - name: Deploy Litware East Resource Group Prod
+        uses: Azure/arm-deploy@v1
+        with:
+          # Provide the scope of the deployment. Valid values are: 'resourcegroup', 'managementgroup', 'subscription'
+          scope: 'subscription'
+          # Override the Subscription Id set by Azure Login.
+          subscriptionId: '8dea3428-7d28-49bf-9340-2aafb548a0d2'
+          # Provide the target region, only required for management Group or Subscription deployments.
+          region: 'eastus2'
+          # Provide the name of a resource group, only required for resource Group deployments.
+          # resourceGroupName: # optional
+          # Specify the path or URL to the Azure Resource Manager template.
+          template: 'Modules/ARM/ResourceGroup/deploy.json'
+          # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
+          deploymentMode: 'Incremental'
+          # Specifies the name of the resource group deployment to create.
+          deploymentName: 'Deploy-Azure-ResourceGroup'
+          # Supply deployment parameter values.
+          parameters: 'Team5Litware/Parameters/East/Prod/Resourcegroup-Network.parameters.json'

@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmNames": {
+            "value": [
+                "SQL-IIS-VM-01"
+                
+            ]
+        },
+        "vmComputerNames": {
+            "value": {
+                "sxxazvmweux-XXXXX-01": "SQLIISVM-1"
+            }
+        },
+        "vmComputerNamesTransformation": {
+            "value": "uppercase"
+        },
+        "imageReference": {
+            "value": {
+                "publisher": "microsoftsqlserver",
+                "offer": "sql2019-ws2019",
+                "sku": "standarddbengineonly",
+                "version": "latest"
+            }
+        },
+        "osDisk": {
+            "value": {
+                "createOption": "fromImage",
+                "diskSizeGB": "128",
+                "managedDisk": {
+                    "storageAccountType": "Premium_LRS"
+                }
+            }
+        },
+        "adminUsername": {
+            "value": "LabAdmin"
+        },
+        
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/8dea3428-7d28-49bf-9340-2aafb548a0d2/resourceGroups/Dev-West/providers/Microsoft.KeyVault/vaults/dev-west-kv"
+                },
+                "secretName": "AdminPassword"
+            }
+        },
+        "nicConfigurations": {
+            "value": [{
+                "nicSuffix": "-nic-01",
+                "ipConfigurations": [{
+                    "name": "ipconfig1",
+                    "vmIPAddress": "10.0.1.3",
+                    "subnetId": "/subscriptions/8dea3428-7d28-49bf-9340-2aafb548a0d2/resourceGroups/Dev-West/providers/Microsoft.Network/virtualNetworks/VNET-West-DEV/subnets/DEV-West-Infra-Subnet"
+                }]
+            }]
+        }
+
+    }
+}
