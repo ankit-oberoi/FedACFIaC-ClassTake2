@@ -50,7 +50,7 @@
                 "nicSuffix": "-nic-01",
                 "ipConfigurations": [{
                     "name": "ipconfig1",
-                    "vmIPAddress": "10.0.1.10",
+                    "vmIPAddress": "10.0.1.20",
                     "subnetId": "/subscriptions/8dea3428-7d28-49bf-9340-2aafb548a0d2/resourceGroups/Production-West/providers/Microsoft.Network/virtualNetworks/VNET-West-Prod/subnets/Prod-West-Infra-Subnet"
                 }]
             }]
