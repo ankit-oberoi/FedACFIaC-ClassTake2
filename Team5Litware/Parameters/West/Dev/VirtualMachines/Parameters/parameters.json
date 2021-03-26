@@ -74,7 +74,7 @@
                         },
                         {
                             "Name": "RegistrationUrl",
-                            "Value": "[reference(concat('Microsoft.Automation/automationAccounts/','https://bc633d1c-b0cf-44ba-8b5c-c3e9e7696659.agentsvc.wus2.azure-automation.net/accounts/bc633d1c-b0cf-44ba-8b5c-c3e9e7696659']",
+                            "Value": "[reference(concat('Microsoft.Automation/automationAccounts/','https://bc633d1c-b0cf-44ba-8b5c-c3e9e7696659.agentsvc.wus2.azure-automation.net/accounts/bc633d1c-b0cf-44ba-8b5c-c3e9e7696659'))]",
                             "TypeName": "System.String"
                         },
                         {
