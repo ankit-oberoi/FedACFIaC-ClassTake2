@@ -4,7 +4,8 @@ name: IIS-SQL-Provisioning-Dev
 on:
   push:
     branches: [ master ]
-
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 env:
   resourceGroupName: ${{ secrets.DEV_RES_GROUP }}
   location: 'uswest2'
