@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "value": "VNET-West-Prod"
+        },
+        "vnetAddressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "Prod-West-Gateway-Subnet",
+                    "addressPrefix": "10.0.0.0/24",
+                    "networkSecurityGroupName": "VNET-West-Prod-NSG",
+                    "routeTableName": "VNET-West-Prod-udr",
+                    "serviceEndpoints": [
+                        {
+                            "service": "Microsoft.EventHub"
+                        },
+                        {
+                            "service": "Microsoft.Sql"
+                        },
+                        {
+                            "service": "Microsoft.Storage"
+                        },
+                        {
+                            "service": "Microsoft.KeyVault"
+                        }
+                    ],
+                    "delegations": [],
+                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                },
+                {
+                    "name": "Prod-West-Infra-Subnet",
+                    "addressPrefix": "10.0.1.0/24",
+                    "networkSecurityGroupName": "VNET-West-Prod-NSG",
+                    "routeTableName": "VNET-West-Prod-udr",
+                    "serviceEndpoints": [
+                        {
+                            "service": "Microsoft.EventHub"
+                        },
+                        {
+                            "service": "Microsoft.Sql"
+                        },
+                        {
+                            "service": "Microsoft.Storage"
+                        },
+                        {
+                            "service": "Microsoft.KeyVault"
+                        }
+                    ],
+                    "delegations": [],
+                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                },
+                {
+                    "name": "Prod-West-Bastian-Subnet",
+                    "addressPrefix": "10.0.2.0/24",
+                    "networkSecurityGroupName": "VNET-West-Prod-NSG",
+                    "routeTableName": "VNET-West-Prod-udr",
+                    "serviceEndpoints": [
+                        {
+                            "service": "Microsoft.EventHub"
+                        },
+                        {
+                            "service": "Microsoft.Sql"
+                        },
+                        {
+                            "service": "Microsoft.Storage"
+                        },
+                        {
+                            "service": "Microsoft.KeyVault"
+                        }
+                    ],
+                    "delegations": [],
+                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateLinkServiceNetworkPolicies": "Enabled"
+                }
+            ]
+        }
+    }
+}
