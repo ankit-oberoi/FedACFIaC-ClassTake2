@@ -1,5 +1,5 @@
 
-name: IIS-SQL-Provisioning
+name: IIS-SQL-Provisioning-Prod
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
         resourceGroupName: ${{ env.resourceGroupName }}
         location: ${{ env.location }}
         templateFile: 'Modules/ARM/VirtualMachines/deploy.json'
-        parametersFile: 'Team5Litware/Parameters/West\Prod/VirtualMachines/Parameters/parameters.json'
+        parametersFile: 'Team5Litware/Parameters/West/Prod/VirtualMachines/Parameters/parameters.json'
         
 
  #  - name: Domain Controller DSC
