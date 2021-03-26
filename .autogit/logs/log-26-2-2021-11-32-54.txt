@@ -1,0 +1,29 @@
+-------------------- Auto-Git Log --------------------
+		Fri Mar 26 2021 11:32:54 GMT-0400 (Eastern Daylight Time)
+------------------------------------------------------
+
+Modified files:
+* Modules/ARM/.global/PipelineTemplates/pipeline.jobs.deploy.yml
+
+
+Created files:
+* .github/workflows/DeployEastResourceGroups.yml
+* Team5Litware/Parameters/East/Dev/IIS-SQL/parameters.json
+* Team5Litware/Parameters/East/Dev/IIS-SQL/template.json
+* Team5Litware/Parameters/East/Dev/NetworkSecurityGroups/VNET-West-DEV-NSG.json
+* Team5Litware/Parameters/East/Dev/RouteTables/VNET-West-DEV-udr.json
+* Team5Litware/Parameters/East/Dev/VirtualMachines/Parameters/parameters.json
+* Team5Litware/Parameters/East/Dev/VirtualMachines/deploy.json
+* Team5Litware/Parameters/East/Dev/VirtualMachines/readme.md
+* Team5Litware/Parameters/East/Dev/VirtualNetwork/VNET-West-DEV.json
+* Team5Litware/Parameters/East/Prod/NetworkSecurityGroups/VNET-West-PROD-NSG.json
+* Team5Litware/Parameters/East/Prod/Resourcegroup-Network.parameters.json
+* Team5Litware/Parameters/East/Prod/RouteTables/VNET-West-PROD-udr.json
+* Team5Litware/Parameters/East/Prod/VirtualNetwork/VNET-West-PROD.json
+
+
+Deleted files:
+
+
+Renamed files:
+* [object Object]
